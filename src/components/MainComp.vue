@@ -2,7 +2,7 @@
   <div class="Container">
     <div v-for="(item, i) in dato" :key="i" class="cardCatalogo">
       <div class="card" style="width: 18rem">
-        <img src="" class="card-img-top" alt="" />
+        <img class="card-img-top" alt="" />
         <div class="card-body">
           <h5 class="card-title">Producto: {{ item.producto }}</h5>
           <p class="card-text">Precio: {{ item.Precio }}</p>

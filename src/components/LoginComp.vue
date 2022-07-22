@@ -1,22 +1,23 @@
 <template>
   <div>
     <div class="container">
-             <form class="login" id="loginForm">
+             <form class="login" id="loginForm" @submit.prevent="ocultarLogin">
                 <h1>LOGIN</h1>
                 <div class="mb-3">
                     <label for="Email" class="form-label">Email</label>
-                    <input type="email" name="Email" class="form-control" id="Email" autocomplete="off" placeholder="Ingrese su email">
-
+                    <input type="email" name="Email" class="form-control" id="Email" ref="inputEmail" v-model="email" autocomplete="off" placeholder="Ingrese su email">
+                    <br>
+                    <p>Email ingresado: {{email}}</p>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" id="inputPassword" maxlength="8" autocomplete="off" placeholder="Ingrese su Password">
+                    <input type="password" name="password" class="form-control" id="inputPassword" ref="inputPassword" autocomplete="off" placeholder="Ingrese su Password">
                 </div>
                 <div class="infoSeleccionOff" id="divIngresar">
-                    <input type="checkbox" class="form-check-input" id="checkIngresar">
+                    <input type="checkbox" class="form-check-input" id="checkIngresar" ref="checkIngresar">
                     <label class="form-check-label" for="exampleCheck1">Ingresar con datos guardados</label>
                 </div>
-                <button type="submit" class="btn btn-primary" id="btnContinuar" @click="ocultarLogin">Continuar</button>
+                <button type="submit" class="btn btn-primary" id="btnContinuar" >Continuar</button>
             </form>
     </div>
   </div>
@@ -24,8 +25,14 @@
 
 <script>
 export default {
+  /* eslint-disable*/
   name: 'LoginComp',
   props: [],
+  data(){
+    return{
+    email: ''  
+    }
+  },
   methods: {
       ocultarLogin() {
       this.$emit("ocultarLogin");
