@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <NavComp @ocultarMain="mainFalse" @mostrarMain="mainTrue" />
-    <LoginComp  @ocultarLogin="btnLogin" :valueEmail="valueEmailInput" :class='{none: MostrarLogin == false}'/>
-    <MainComp :dato="productos" @agregarAlCarrito="agregarAlCarrito" @sumarCarrito="agregarAlCarrito" :class='{none: mostrarMain == false, container: mostrarMain == true}' />
+    <NavComp @ocultarMain="mainFalse" @mostrarMain="mainTrue" v-if="mostrarNav"/>
+    <RegisterComp @ocultarRegister="ocultarRegister" v-if="mostrarRegister"/>
+    <LoginComp  @goRegister="goRegister" @ocultarLogin="btnLogin" :valueEmail="valueEmailInput" :class='{none: MostrarLogin == false}'/>
+    <MainComp :dato="productos"  @agregarAlCarrito="agregarAlCarrito" @sumarCarrito="agregarAlCarrito" :class='{none: mostrarMain == false, container: mostrarMain == true}' />
     <CarritoComp v-if="mostrarCarritoV" :dato2="productos" :carrito="carrito" :class='{ container: mostrarCarrito == true ,none: mostrarCarrito == false} ' id="carritoPrueba"/>
   </div>
 </template>
@@ -10,6 +11,7 @@
 <script>
 import NavComp from "./components/NavComp.vue";
 import MainComp from "./components/MainComp.vue";
+import RegisterComp from "./components/RegisterComp.vue";
 import LoginComp from "./components/LoginComp.vue";
 import CarritoComp from "./components/CarritoComp.vue";
 
@@ -20,6 +22,7 @@ export default {
     MainComp,
     LoginComp,
     CarritoComp,
+    RegisterComp
   },
   data() {
     return {
@@ -29,16 +32,28 @@ export default {
       mostrarCarrito: false,
       MostrarLogin:true,
       valueEmailInput: '',
-      mostrarCarritoV: ''
+      mostrarCarritoV: '',
+      mostrarRegister: false,
+      mostrarNav: false
     };
   },
   methods: {
     /*eslint-disable*/
+    goRegister(){
+      this.mostrarRegister = true
+      this.MostrarLogin = false
+  },
+    ocultarRegister(){
+      this.mostrarRegister = false
+      this.MostrarLogin = true
+    },
     btnLogin(){
       this.MostrarLogin = false
       this.mostrarMain= true    
       this.mostrarCarrito = false
+      this.mostrarNav = true
     },
+
     async agregarAlCarrito(prodId) {
       let vm = this
       const cart = await this.carrito.filter(function (prod, i) {
@@ -63,6 +78,8 @@ export default {
 
       }, 10)
     },
+        
+        
     mainTrue() {
       if (this.MostrarLogin == false) {
         this.mostrarMain = true;
@@ -84,6 +101,12 @@ export default {
 .none {
   display: none;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 
 .container {
   display: block !important;

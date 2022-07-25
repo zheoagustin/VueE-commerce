@@ -1,5 +1,6 @@
 <template>
   <div class="Container">
+    <h2>Bienvenido {{ this.nombreCompleto }}</h2>
     <div v-for="(item, i) in dato" :key="i" class="cardCatalogo">
       <div class="card" style="width: 18rem">
         <img class="card-img-top" alt="" />
@@ -12,9 +13,12 @@
             @click="agregarAlCarrito(item.id)"
             >Comprar</a
           >
+          
         </div>
       </div>
+      
     </div>
+
   </div>
 </template>
 
@@ -22,12 +26,18 @@
 export default {
   name: "MainComp",
   props: ["dato", "id"],
+  data() {
+    return {
+      nombreCompleto: localStorage.getItem("Nombre"),
+    };
+  },
   methods: {
-    agregarAlCarrito (item) {
-      this.$emit("agregarAlCarrito", item)
-
-    }
-    
+    agregarAlCarrito(item) {
+      this.$emit("agregarAlCarrito", item);
+    },
+    quitarCarrito(item) {
+      this.$emit("quitarCarrito", item);
+    },
   },
 };
 </script>
@@ -35,5 +45,13 @@ export default {
 .cardCatalogo {
   display: inline-block;
   margin: 25px;
+  background-color: white;
+}
+.card {
+  background: white;
+  border: 2px solid black;
+}
+h2 {
+  text-align: center;
 }
 </style>

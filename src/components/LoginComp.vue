@@ -5,19 +5,17 @@
                 <h1>LOGIN</h1>
                 <div class="mb-3">
                     <label for="Email" class="form-label">Email</label>
-                    <input type="email" name="Email" class="form-control" id="Email" ref="inputEmail" v-model="email" autocomplete="off" placeholder="Ingrese su email">
+                    <input type="email" name="Email" class="form-control" id="Email" ref="inputEmail" v-model="email"  placeholder="Ingrese su email">
                     <br>
-                    <p>Email ingresado: {{email}}</p>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" id="inputPassword" ref="inputPassword" autocomplete="off" placeholder="Ingrese su Password">
+                    <input type="password" name="password" class="form-control" id="inputPassword" ref="inputPassword" v-model="password" autocomplete="off" placeholder="Ingrese su Password">
                 </div>
                 <div class="infoSeleccionOff" id="divIngresar">
-                    <input type="checkbox" class="form-check-input" id="checkIngresar" ref="checkIngresar">
-                    <label class="form-check-label" for="exampleCheck1">Ingresar con datos guardados</label>
+                    <a @click="goRegister">¿Aun no estas registrado?</a>
                 </div>
-                <button type="submit" class="btn btn-primary" id="btnContinuar" >Continuar</button>
+                <button type="submit" class="btn btn-primary" id="btnContinuar">Continuar</button>
             </form>
     </div>
   </div>
@@ -30,13 +28,23 @@ export default {
   props: [],
   data(){
     return{
-    email: ''  
+    email: ''  ,
+    password: '',
+    emailLs: localStorage.getItem("Email"),
+    passwordLs: localStorage.getItem("Password")
     }
   },
   methods: {
+      goRegister(){
+        this.$emit("goRegister")
+      },
       ocultarLogin() {
-      this.$emit("ocultarLogin");
-    }
+        if (this.email === this.emailLs || this.password === this.passwordLs) {
+          this.$emit("ocultarLogin")
+        }else {
+          alert("Usuario no registrado")
+        }
+},
   }
 }
 </script>
@@ -46,15 +54,23 @@ export default {
 .container {
   width: 30% !important;
   border: 1px solid black;
-  padding: 20px;}
+  padding: 20px;
+  margin-top: 100px;
+    border-radius: 15px;
+
+  }
   
 #divIngresar {
   width: 100%;
-  margin-left: 100px;
+  text-align: center;
+}
+#divIngresar a:hover{
+  background: rgb(218, 218, 218);
+  cursor: pointer;
 }
 
 #btnContinuar {
-  margin-left: 140px;
+  margin-left: 130px;
   margin-bottom: 30px;
   margin-top: 30px;
 }

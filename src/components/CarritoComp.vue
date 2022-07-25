@@ -3,9 +3,9 @@
     <div class="Container" id="carritoId">
     <table class="table table-dark table-striped-columns">
       <tr v-for="(item, i) in carrito " :key="i">
-        <td >{{item.producto}}</td>
-
-        <td>{{item.cantidad}}</td>
+        <td >Producto: {{item.producto}}</td>
+        <td>Precio: {{item.Precio}}</td>
+        <td>Cantidad: {{item.cantidad}}</td>
       </tr>
     </table>
     </div>
@@ -30,6 +30,9 @@ export default {
 .stockCarrito {
   border: 1px solid black;
   margin :30px;
+  background: black;
 }
-
+#carritoId {
+  background: black !important;
+}
 </style>

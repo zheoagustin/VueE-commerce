@@ -1,11 +1,12 @@
 <template>
-  <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="">
+    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a
             class="nav-item nav-link active"
             href="javascript:void(0)"
+            id="catalogo"
             @click="mostrarMain"
             >Catalogo <span class="sr-only">(current)</span></a
           >
@@ -42,5 +43,14 @@ export default {
   justify-content: center !important;
   margin: 0px auto !important;
   font-size: 20px;
+  background: rgb(218, 218, 218);
 }
+#navbarNavAltMarkup {
+    background: rgb(219, 219, 219);
+}
+#catalogo:hover {
+  background:gray;
+  cursor: pointer ;
+}
+
 </style>
